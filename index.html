@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- {{ userInfo.name }} - {{ userInfo.age }} - {{ userInfo.gender }}
+		<button @click="add">过生日</button>
+		<button @click="addAttr">加属性</button>
+		<button @click="reduceAttr">减属性</button> -->
+		<div>{{arr}}</div>
+		<button @click="addAttr">加属性</button>
+		<button @click="reduceAttr">减属性</button>
+	</div>
+	<script>
+		var app = new Vue({
+			el: '#app',
+			data: {
+				userInfo: {
+					name: '张三',
+					age: 12
+				},
+				arr: []
+			},
+			created () {
+				this.arr = [1,2,3,4,5,6];
+			},
+			methods: {
+				add () {
+					if (this.userInfo.age) {
+						this.userInfo.age++;
+					} else {
+						this.$set(this.userInfo, 'age', 12);
+					}
+				},
+				addAttr () {
+					/* // this.userInfo.gender = '男';
+					this.$set(this.userInfo, 'gender', 'βヾ(,,・∇・,,川←娜美'); */
+					this.arr.push(Math.random());
+				},
+				reduceAttr () {
+				/* 	// delete this.userInfo.gender; // 无效
+					this.$delete(this.userInfo, 'age');
+					// delete this.userInfo.age; */
+					// this.arr.pop();
+					this.arr.splice(2, 1);
+				}
+			}
+		})
+	</script>
+</body>
+</html>
