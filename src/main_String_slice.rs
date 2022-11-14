@@ -1,7 +1,7 @@
 // String - 切片（slice）
 /**
- * String: 是一个是一个指针类型
- * &str: 是一个值类型，编译器已经知道了他的具体大小，并直接编译到可执行文件中
+ * String: 可变长度
+ * &str: 固定长度，编译器已经知道了他的具体大小，并直接编译到可执行文件中
  */
 
 /* fn main() {
@@ -10,7 +10,7 @@
     let s = format!("{} {}!", s1, s2);
     println!("{}", s);
 } */
-fn main() {
+/* fn main() {
     // let ss = String::from("通过：String::from得到的字符串");
     // 通过 \ + 字符的十六进制表示，转义输出一个字符
     let byte_escape = "I'm writing \x52\x75\x73\x74!";
@@ -43,4 +43,19 @@ fn main() {
     for b in "中国人".bytes() {
         println!("{}", b);
     }
+} */
+fn main () {
+    let s1 = "s1 呀";
+    let s2 = String::from("S2 呀");
+
+    say(s1);
+    println!("{}", s1);
+    say2(&s2); // 这里传递的是 String 的引用，如果直接传值，则下面那一行会报错
+    println!("{}", s2);
+}
+fn say (s: &str) {
+    println!("s is {}", s);
+}
+fn say2 (s: &String) { // 这里取的是 String 类型的引用
+    println!("s2 is {}", s);
 }
