@@ -20,13 +20,13 @@ fn main () {
     let elem = a[index];
     println!("The value of the element at index {} is: {}", index, elem) */
 
-    /* // 2、数组元素为非基本类型
+    // 2、数组元素为非基本类型
     let array: [String; 8] = core::array::from_fn(|i| String::from("I`m a String!"));
     println!("array<String> is {:#?}", array);
 
     // 3、数组切片
     let slice = &a[1..3];
-    println!("数组切片 [slice] 是 {:?}, 原数组a是：{:?}", slice, a); */
+    println!("数组切片 [slice] 是 {:?}, 原数组a是：{:?}", slice, a);
     // 编译器自动推导出one的类型
 
     let one= [1, 2, 3];
