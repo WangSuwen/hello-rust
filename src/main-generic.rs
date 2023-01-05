@@ -1,9 +1,9 @@
 // 泛型
 fn main () {
-    /*
+    
     // #[derive(Debug)]
     // TODO: 注意：泛型在使用之前需要先声明，  largest 后面的 <T> 就是声明
-    fn largest<T: std::cmp::PartialOrd>(list: &[T]) -> T {
+    fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
         let mut largest = list[0];
         for &item in list.iter() {
             if item > largest {
@@ -18,7 +18,7 @@ fn main () {
     let char_list = vec!['y', 'm', 'a', 'q'];
     let result = largest(&char_list);
     println!("The largest char is {}", result);
-     */
+    
 
     // 2、方法中使用泛型
     // TODO: 在方法中使用泛型时，需要先定义泛型，注意：   impl<T> 这才是定义泛型， 而 Point<T> 整体是表示一个Struct；
