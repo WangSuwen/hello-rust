@@ -1,87 +1,45 @@
-// 关联类型 + 调用同名方法 + 特征约束
-/* use std::ops::Add;
-#[derive(Debug, PartialEq)]
-struct Point {
-    x: i32,
-    y: i32
-}
-impl Add for Point {
-    type Output = Point;
-    fn add(self, other: Point) -> Point {
-        Point {
-            x: self.x + other.x,
-            y: self.y + other.y
-        }
-    }
-}
-fn main () {
-    assert_eq!(Point { x: 1, y: 2 } + Point { x: 2, y: 2}, Point { x: 3, y: 3 });
-} */
-
-// 调用同名方法
-/* 
-trait Polit {
-    fn fly(&self);
-}
-
-trait Wizard {
-    fn fly(&self);
-}
-struct Human;
-
-impl Polit for Human {
-    fn fly(&self) {
-        println!("Polit flying");
-    }
-}
-impl Wizard for Human {
-    fn fly(&self) {
-        println!("Wizard flying")
-    }
-}
-
-impl Human {
-    fn fly(&self) {
-        println!("Human flying");
-    }
-}
+// 动态数组 Vector
 
 fn main () {
-    let person = Human;
-    person.fly(); // Human flying  调用 Human 类型自身的 fly 方法
-    Polit::fly(&person);  // Polit flying  调用特征Polit上的 fly 方法
-    Wizard::fly(&person); // Wizard flying
-} */
 
-// 特征约束
-use std::fmt;
-trait OutlinePrint:fmt::Display {
-    fn outline_print(&self) {
-        let output = self.to_string();
-        let len = output.len();
-        println!("{}", "*".repeat(len + 4));
-        println!("*{}*", " ".repeat(len + 2));
-        println!("* {} *", output);
-        println!("*{}*", " ".repeat(len + 2));
-        println!("{}", "*".repeat(len + 4));
+    // 1、不指定类型时，第一次push后，会自动确定数组的类型
+    let mut v = Vec::new();
+    v.push(1);
+
+    // 2、显示的声明数组内元素的类型
+    let mut v1: Vec<String> = Vec::new();
+    v1.push(String::from("张三"));
+
+    // 3、创建指定长度的数组
+    let mut v2: Vec<i32> = Vec::with_capacity(6);
+    v2.push(1);
+    v2.push(2);
+    v2.push(3);
+    v2.push(4);
+    v2.push(5);
+    v2.push(6);
+    v2.push(7);
+    println!("v2 的长度： {}", v2.len());
+    
+    // 4、 使用宏 vec!
+    let v3 = vec![1, 2, 3, 4];
+    println!("v3 的长度： {}", v3.len());
+
+    // 5、从Vector 中读取元素 TODO: 注意： v[index] 方式会出现下标越界问题，v.get(index)则不会，内部处理的会返回None；
+    let v4 = vec![1, 2, 3, 4, 5, 6];
+    let third = &v4[2];
+    println!("v4 的第三个元素是： {}", third);
+    match v4.get(1) {
+        Some(match_val) if match_val < &3 => {
+            println!("match 匹配到值 {} 小于3", match_val);
+        },
+        Some(match_val @ 3..=5) => {
+            println!("match 在 [3:5]的范围内: {}", match_val);
+        },
+        Some(match_val) => {
+            println!("match 匹配到值了： {}", match_val);
+        },
+        None => println!("match 了个寂寞!")
     }
-}
-struct Point {
-    x: i32,
-    y: i32,
-}
 
-impl OutlinePrint for Point {}
-
-impl fmt::Display for Point {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "({}, {})", self.x, self.y)
-    }
-}
-fn main () {
-    let point = Point {
-        x: 12,
-        y: 12
-    };
-    point.outline_print();
 }
