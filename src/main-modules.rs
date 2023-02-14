@@ -1,46 +1,4 @@
-// 模块功能
-
-/* mod front_of_house {
-    pub mod hosting {
-        pub fn add_to_waitlist() {
-            println!("add to waitlist !!");
-        }
-    }
-}
-pub fn eat_at_restaurant() {
-    // 绝对路径
-    crate::front_of_house::hosting::add_to_waitlist();
-    // 相对路径
-    front_of_house::hosting::add_to_waitlist();
-} */
-
-// 1、通过 rs 文件 引用其他的 lib
-/* mod front_of_house;
-
-pub use crate::front_of_house::hosting;
-
-pub fn eat_at_restaurant() {
-    hosting::add_to_waitlist();
-} */
-
-// 2、通过 目录中的 rs 文件引用其他 lib
-
-/* mod front_of_house;
-pub use crate::front_of_house::hosting::{
-    add_to_waitlist,
-    add_to_waitlist2
-};
-// 1、使用 `as` 来避免名称重复
-// 2、去掉pub，将引入的函数，在此文件中变为私有属性，对外不可见
-use crate::front_of_house::hosting::add_to_waitlist3 as atw3;
-
-pub fn eat_at_restaurant() {
-    add_to_waitlist();
-    add_to_waitlist2();
-    atw3();
-} */
-
-// 综合示例： 一个名为 `my_mod` 的模块
+// 模块 学习 + lib.rs 文件
 mod my_mod {
     // 模块中的项默认具有私有的可见性
     fn private_function() {
@@ -123,7 +81,7 @@ fn main() {
     my_mod::call_public_function_in_my_mod();
 
     // pub(crate) 项可以在同一个 crate 中的任何地方访问
-    my_mod::public_function_in_crate();
+    my_mod::public_function_in_crate()
 
     // pub(in path) 项只能在指定的模块中访问
     // 报错！函数 `public_function_in_my_mod` 是私有的
