@@ -1,3 +1,7 @@
+// 引入自定义的依赖包，以 【包根】为始 `hello_rust`
+use hello_rust::kinds::PrimaryColor;
+use hello_rust::utils::mix;
+
 // 模块 学习 + lib.rs 文件
 mod my_mod {
     // 模块中的项默认具有私有的可见性
@@ -101,4 +105,9 @@ fn main() {
     // 报错！ `private_nested` 是私有的
     //my_mod::private_nested::function();
     // 试一试 ^ 取消此行的注释
+
+    // 使用引入的自定义依赖包
+    let blue = PrimaryColor::Blue;
+    let yellow = PrimaryColor::Yellow;
+    println!("{:?}", mix(blue, yellow));
 }

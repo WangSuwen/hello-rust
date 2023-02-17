@@ -2,7 +2,7 @@
 #![allow(unused)]
 //! # Art
 //!
-//!  未来的艺术建模库，现在的调色库
+//!  这是在 lib.rs中的文档注释
 
 pub use self::kinds::PrimaryColor;
 pub use self::kinds::SecondaryColor;
