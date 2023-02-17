@@ -1,49 +1,46 @@
-// 格式化输出
-
-/**
- *  print! 将格式化文本输出到标准输出，不带换行符
-    println! 同上，但是在行的末尾添加换行符
-    format! 将格式化文本输出到 String 字符串
- * 
- * 
- *  {} 适用于实现了 std::fmt::Display 特征的类型，用来以更优雅、更友好的方式格式化文本，例如展示给用户
-    {:?} 适用于实现了 std::fmt::Debug 特征的类型，用于调试场景
-    {:#?} 与 {:?} 几乎一样，唯一的区别在于它能更优美地输出内容：
- */
-
+// 生命周期
 fn main() {
-    println!("{:04}", 42);
-    eprintln!("Error: Here is an error!!!");
-
-    // 1、为自定义类型实现 Display 特征
-    /* struct Person {
-        name: String,
-        age: u8,
+    // 1、 悬垂指针， 下面代码中，x 在 } 之后就已经被释放了，然后 println! 中的r引用x时，引用了个寂寞，这就是所谓的【悬垂指针】
+    /* let r;
+    {
+        let x = 5;
+        r = &x;
     }
-    use std::fmt;
-    impl fmt::Display for Person {
-        fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-            write!(
-                f,
-                "大佬在上，请受我一拜，小弟姓名{}，年芳{}，家里无田又无车，生活苦哈哈",
-                self.name, self.age
-            )
+    println!("r: {}", r); */
+
+    // 2、生命周期的应用
+    /* let string1 = String::from("abcd");
+    let string2 = "xyz";
+    let result = longest(string1.as_str(), string2);
+    println!("The longest string is {}", result);
+
+    // 如果不加生命周期的话，会报错
+    fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+        if x.len() > y.len() {
+            x
+        } else {
+            y
         }
+    } */
+
+    /* fn longest<'a>(x: &str, y: &str) -> String {
+        let result = String::from("Hello, world!");
+        // result.as_str()  // 这里函数要求返回一个生命周期为'a的引用【 &'a str 】，但是声明周期在 } 处已结束，会导致悬垂引用，所以编译不过
+        result // 我们可以返回 String 的所有权，这样就不会有生命周期的问题了，但是需要将函数返回值改成 String
     }
-    let p = Person {
-        name: "sunface".to_string(),
-        age: 18,
+    println!("{}", longest("", "")); */
+
+    #[derive(Debug)]
+    struct ImportantExcept<'a> {
+        part: &'a str
+    }
+
+    let novel = String::from("Call me Ishmael. Some years ago...");
+    let first_sentence = novel.split('.').next().expect("Could not find a '.'");
+    // println!("{}", first_sentence);
+    let i = ImportantExcept{
+        part: first_sentence
     };
-    println!("{}", p); */
+    println!("{:?}", i.part);
 
-    // 2、在格式化字符串时捕获环境中的值（Rust 1.58 新增）
-    fn get_person() -> String {
-        String::from("sunface")
-    }
-
-    let p = get_person();
-    println!("Hello, {}!", p);                // implicit position
-    println!("Hello, {0}!", p);               // explicit index
-    println!("Hello, {person}!", person = p);
-    println!("Hello, {person}!");
 }
