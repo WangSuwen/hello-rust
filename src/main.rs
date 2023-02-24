@@ -30,7 +30,7 @@ fn main() {
     }
     println!("{}", longest("", "")); */
 
-    #[derive(Debug)]
+    /* #[derive(Debug)]
     struct ImportantExcept<'a> {
         part: &'a str
     }
@@ -41,6 +41,24 @@ fn main() {
     let i = ImportantExcept{
         part: first_sentence
     };
-    println!("{:?}", i.part);
+    println!("{:?}", i.part); */
+
+    use std::fmt::Display;
+
+    fn longest_with_an_announcement<'a, T>(
+        x: &'a str,
+        y: &'a str,
+        ann: T,
+    ) -> &'a str
+    where
+        T: Display,
+    {
+        println!("Announcement! {}", ann);
+        if x.len() > y.len() {
+            x
+        } else {
+            y
+        }
+    }
 
 }
