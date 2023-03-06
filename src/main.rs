@@ -1,3 +1,5 @@
+use std::fmt::Debug;
+
 // 生命周期
 fn main() {
     // 1、 悬垂指针， 下面代码中，x 在 } 之后就已经被释放了，然后 println! 中的r引用x时，引用了个寂寞，这就是所谓的【悬垂指针】
@@ -94,8 +96,8 @@ fn main() {
     import.announce_and_retur_part("123443211234"); */
 
     // 4、&'static 与 T: 'static 的区别
-
-    use std::{slice::from_raw_parts, str::from_utf8_unchecked};
+    // 4.1、 &'static
+    /* use std::{slice::from_raw_parts, str::from_utf8_unchecked};
 
     fn get_memory_location() -> (usize, usize) {
         let string = "Hello world";
@@ -111,5 +113,12 @@ fn main() {
     }
     let (pointer, length) = get_memory_location();
     let message = get_str_at_location(pointer, length);
-    println!("The {} bytes at 0X{:X} stored: {}", length, pointer, message);
+    println!("The {} bytes at 0X{:X} stored: {}", length, pointer, message); */
+
+    // 4.2、 T: 'static
+    fn print_it<T: Debug + 'static>(input: &T) {
+        println!("'static value passed in is: {:?}", input);
+    }
+    let i = 12;
+    print_it(&i);
 }
