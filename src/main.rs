@@ -64,9 +64,9 @@ fn main() {
     } */
 
     // 3、方法中的生命周期
-    struct ImportantExcept<'a> {
+   /*  struct ImportantExcept<'a> {
         part: &'a str,
-    }
+    } */
 
     // 1）、不显示的声明生命周期
     /* impl<'a> ImportantExcept<'a> {
@@ -116,9 +116,30 @@ fn main() {
     println!("The {} bytes at 0X{:X} stored: {}", length, pointer, message); */
 
     // 4.2、 T: 'static
-    fn print_it<T: Debug + 'static>(input: &T) {
+    /* fn print_it<T: Debug + 'static>(input: &T) {
         println!("'static value passed in is: {:?}", input);
     }
     let i = 12;
     print_it(&i);
+
+    let closure_slision = |x: &i32| -> &i32 { x }; // 这里是闭包 closure */
+    // 4.3、 再借用 reborrow
+    #[derive(Debug)]
+    struct Point {
+        x: i32,
+        y: i32
+    }
+    impl Point {
+        fn move_to(&mut self, x: i32, y: i32) {
+            self.x = x;
+            self.y = y;
+        }
+    }
+
+    let mut p = Point{ x: 0, y: 0};
+    let r = &mut p;
+    let rr = &*r; // 此处为再借用，不会破坏借用规则，但是不能在其生命周期内使用原始的借用 r。
+    println!("{:?}", rr);
+    r.move_to(10, 10);
+    println!("{:?}", r);
 }
