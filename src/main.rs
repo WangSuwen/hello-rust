@@ -124,7 +124,7 @@ fn main() {
 
     let closure_slision = |x: &i32| -> &i32 { x }; // 这里是闭包 closure */
     // 4.3、 再借用 reborrow
-    #[derive(Debug)]
+    /* #[derive(Debug)]
     struct Point {
         x: i32,
         y: i32
@@ -141,5 +141,45 @@ fn main() {
     let rr = &*r; // 此处为再借用，不会破坏借用规则，但是不能在其生命周期内使用原始的借用 r。
     println!("{:?}", rr);
     r.move_to(10, 10);
-    println!("{:?}", r);
+    println!("{:?}", r); */
+
+    // 4.4、一个复杂的例子
+    #[derive(Debug)]
+    struct Manager<'a> {
+        text: &'a str
+    }
+
+    struct Interface<'b, 'a> {
+        manager: &'b mut Manager<'a>
+    }
+
+    impl<'b, 'a: 'b> Interface<'b, 'a> {
+        pub fn noop(self) {
+            println!("{:?}, interface consumed", self.manager);
+        }
+    }
+
+    struct List<'a> {
+        manager: Manager<'a>
+    }
+    impl<'a> List<'a> {
+        pub fn get_interface<'b> (&'b mut self) -> Interface<'b, 'a>
+        where 'a: 'b {
+            Interface {
+                manager: &mut self.manager
+            }
+        }
+    }
+
+    let mut list = List{  // 生成 实例 list，生命周期为 'a
+        manager: Manager { text: "hello" }
+    };
+    list.get_interface().noop(); // 获取 Interface 的引用， 声明周期为 'b
+
+    use_list(&list);
+
+    fn use_list(list: &List) {
+        println!("{}", list.manager.text);
+    }
+
 }
