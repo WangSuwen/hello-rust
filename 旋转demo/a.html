@@ -11,36 +11,36 @@
             margin-right: auto;
             background-color: #f0f0f0;
             box-shadow: inset 0 0 3px rgba(0,0,0,.35);	
-            -webkit-perspective: 800px;
-            -moz-perspective: 800px;
             perspective: 800px;
-            -webkit-transition: top .5s;
             position: relative;
-            top: 0;
         }
     
         .container {
             width: 128px;
             height: 100px;
             margin-left: -64px;
-            -webkit-transition: -webkit-transform 1s;
-            -moz-transition: -moz-transform 1s;
-            transition: transform 1s;
             transform: rotateX(-17deg) rotateY(0deg);
-            -webkit-transform-style: preserve-3d;
-            -moz-transform-style: preserve-3d;
             transform-style: preserve-3d;	
             position: absolute;
             top: 50%;
             left: 50%;
+            animation: move 30s infinite;
+        }
+        @keyframes move {
+            0% {
+                transform: rotateX(-17deg) rotateY(0deg);
+            }
+            100% {
+                transform: rotateX(-17deg) rotateY(-360deg);
+            }
         }
         
         .piece {
             width: 128px;
             box-shadow: 0 1px 3px rgba(0,0,0,.5);
-            -webkit-transition: opacity 1s, -webkit-transform 1s;
+            /* -webkit-transition: opacity 1s, -webkit-transform 1s;
             -moz-transition: opacity 1s, -moz-transform 1s;
-            transition: opacity 1s, transform 1s;  
+            transition: opacity 1s, transform 1s;   */
             position: absolute;
             bottom: 0;
         }
@@ -109,7 +109,7 @@
             });
             
             arrayPic.forEach(function(i, j) {
-                transform($("#piece" + i), "rotateY("+ j * rotate +"deg) translateZ("+ (transZ + 20) +"px)");	
+                transform($("#piece" + i), "rotateY("+ j * rotate +"deg) translateZ("+ (transZ + 120) +"px)");	
             });	
             // 垂直位置居中 - Chrome浏览器
             var funStageValign = function(element) {
