@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Canvas动画</title>
+    <style>
+      canvas {
+        width: 500px;
+        height: 500px;
+      }
+      .container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 50px auto;
+  border: 1px solid black;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.card {
+  position: absolute;
+  width: 80px;
+  height: 120px;
+  background-color: #eaeaea;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  transform-origin: bottom center;
+  animation: orbit 5s linear infinite;
+}
+
+.card:nth-child(1) {
+  transform: rotate(0deg) translateY(-200px) rotate(0deg);
+}
+
+.card:nth-child(2) {
+  transform: rotate(72deg) translateY(-200px) rotate(-72deg);
+}
+
+.card:nth-child(3) {
+  transform: rotate(144deg) translateY(-200px) rotate(-144deg);
+}
+
+.card:nth-child(4) {
+  transform: rotate(216deg) translateY(-200px) rotate(-216deg);
+}
+
+.card:nth-child(5) {
+  transform: rotate(288deg) translateY(-200px) rotate(-288deg);
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateY(-200px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateY(-200px) rotate(-360deg);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+      </div>
+      
+    <canvas id="canvas"></canvas>
+    <script>
+      // 获取canvas元素和上下文
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+
+      // 定义卡片大小和圆半径
+      const cardSize = 50;
+      const radius = 200;
+
+      // 定义卡片数组，每个元素包含卡片位置和颜色
+      const cards = [
+        { x: 0, y: 0, color: '#FF0000' },
+        { x: 0, y: 0, color: '#00FF00' },
+        { x: 0, y: 0, color: '#0000FF' },
+        { x: 0, y: 0, color: '#FFFF00' },
+        { x: 0, y: 0, color: '#00FFFF' }
+      ];
+
+      // 动画循环
+      function animate() {
+        // 清空画布
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 计算当前时间对应的角度
+        const now = Date.now();
+        const angle = now / 500;
+
+        // 绘制圆心
+        ctx.beginPath();
+        ctx.arc(canvas.width / 2, canvas.height / 2, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = '#000000';
+        ctx.fill();
+
+        // 绘制卡片
+        for (let i = 0; i < cards.length; i++) {
+          const card = cards[i];
+          // 计算卡片位置
+          card.x = canvas.width / 2 + Math.cos(angle + i * 2 * Math.PI / cards.length) * radius - cardSize / 2;
+          card.y = canvas.height / 2 + Math.sin(angle + i * 2 * Math.PI / cards.length) * radius - cardSize / 2;
+          // 绘制卡片
+          ctx.fillStyle = card.color;
+          ctx.fillRect(card.x, card.y, cardSize, cardSize);
+        }
+
+        // 动画循环
+        requestAnimationFrame(animate);
+      }
+
+      // 启动动画
+      animate();
+    </script>
+  </body>
+</html>

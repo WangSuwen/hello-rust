@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .flex {
+            display: flex;
+        }
+        .f-d-c {
+            flex-direction: column;
+        }
+        #myCanvas {
+            border: 1px solid black;
+        }
+
+    </style>
+</head>
+<body>
+   <!--  <div class="flex f-d-c">
+        <h3>Demo 1</h3>
+        <svg width="320" height="320" xmlns="http://www.w3.org/2000/svg">
+            <g> 
+                <text font-family="microsoft yahei" font-size="120" y="160" x="160">
+                马
+                <animate attributeName="x" from="160" to="60" begin="0s" dur="3s" repeatCount="indefinite" />
+                </text>
+            </g>
+        </svg>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 2</h3>
+        <svg width="320" height="320" xmlns="http://www.w3.org/2000/svg">
+            <g> 
+                <text font-family="microsoft yahei" font-size="80" y="100" x="100">马</text>
+                <animateTransform attributeName="transform" begin="0s" dur="3s"  type="scale" from="1" to="1.5" repeatCount="indefinite"/>
+            </g>
+        </svg>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 3</h3>
+        <svg width="360" height="200" xmlns="http://www.w3.org/2000/svg">
+            <text font-family="microsoft yahei" font-size="40" x="0" y="0" fill="#cd0000">马
+                <animateMotion path="M10,80 q100,120 120,20 q140,-50 160,0" begin="0s" dur="3s" repeatCount="indefinite"/>
+            </text>
+            <path d="M10,80 q100,120 120,20 q140,-50 160,0" stroke="#cd0000" stroke-width="2" fill="none" />
+        </svg>
+    </div>
+
+    <div class="flex f-d-c">
+        <h3>Demo 4</h3>
+        <svg width="360" height="200" xmlns="http://www.w3.org/2000/svg">
+            <text font-family="microsoft yahei" font-size="40" x="0" y="0" fill="#cd0000">马
+            <animateMotion path="M10,80 q100,120 120,20 q140,-50 160,0" begin="0s" dur="3s" rotate="auto" repeatCount="indefinite"/>
+            </text>
+            <path d="M10,80 q100,120 120,20 q140,-50 160,0" stroke="#cd0000" stroke-width="2" fill="none" />
+        </svg>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 5</h3>
+        <svg width="320" height="200" xmlns="http://www.w3.org/2000/svg">
+            <text font-family="microsoft yahei" font-size="120" y="160" x="160">马
+                <animate attributeName="x" from="160" to="60" begin="0s" dur="3s" repeatCount="indefinite" />
+                <animate attributeName="opacity" from="1" to="0" begin="0s" dur="3s" repeatCount="indefinite" />
+            </text>
+        </svg>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 6</h3>
+        <svg width="320" height="200" xmlns="http://www.w3.org/2000/svg">
+            <text font-family="microsoft yahei" font-size="120" y="150" x="160">
+                马
+                <animate attributeName="x" values="160;40;160" dur="3s" repeatCount="indefinite" />
+            </text>
+        </svg>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 7</h3>
+        <svg width="320" height="200" xmlns="http://www.w3.org/2000/svg">
+            <text font-family="microsoft yahei" font-size="120" y="160" x="160">马
+                <animate id="x" attributeName="x" to="60" begin="0s" dur="3s" fill="freeze" />
+                <animate attributeName="y" to="100" begin="x.end - 1s" dur="3s" fill="freeze" />
+            </text>
+        </svg>
+    </div>
+
+    <div class="flex f-d-c">
+        <h3>Demo 8</h3>
+        <svg id="svg" width="320" height="200" xmlns="http://www.w3.org/2000/svg">
+            <circle id="circle" cx="100" cy="100" r="50"></circle>
+            <text font-family="microsoft yahei" font-size="120" y="160" x="160">马
+                <animate attributeName="x" to="60" begin="circle.click" dur="3s" />
+            </text>
+        </svg>
+    </div>
+
+    <div class="flex f-d-c">
+        <h3>Demo 9</h3>
+        <svg width="320" height="200" xmlns="http://www.w3.org/2000/svg">
+            <text font-family="microsoft yahei" font-size="120" y="160" x="160">马
+                <animate id="xx" attributeName="x" to="60" begin="0s" dur="3s" repeatCount="indefinite" />
+                <animate attributeName="y" to="100" begin="xx.repeat(2)" dur="3s" fill="freeze" />
+            </text>
+        </svg>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 10</h3>
+        <svg width="320" height="200" xmlns="http://www.w3.org/2000/svg">
+            <text font-family="microsoft yahei" font-size="120" y="160" x="160">马
+                <animate attributeName="x" to="60" begin="accessKey(s)" dur="3s" repeatCount="indefinite" />
+            </text>
+        </svg>
+    </div>
+    <div class="flex f-d-c">
+        <h3>点击后执行动画</h3>
+        <svg id="demo11Svg" width="320" height="200" xmlns="http://www.w3.org/2000/svg">
+            <text font-family="microsoft yahei" font-size="120" y="160" x="160">马
+                <animate id="demo11" attributeName="x" to="60" begin="indefinite" dur="3s" />
+            </text>
+        </svg>
+    </div>
+    <div class="flex f-d-c">
+        <h3>点击a标签实现动画</h3>
+        <svg width="320" height="200" font-family="microsoft yahei" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <text font-size="120" y="160" x="160">马
+                 <animate id="animate" attributeName="x" to="60" begin="indefinite" dur="3s" repeatCount="indefinite" />
+            </text>
+            <a xlink:href="#animate">
+                 <text x="10" y="20" fill="#cd0000" font-size="30">点击我</text>
+            </a>
+       </svg>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 13</h3>
+        <svg width="620" height="600" font-family="microsoft yahei" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <text font-size="120" y="160" x="160">马
+                <animateMotion begin="0" dur="5s" path="M10,80 q100,120 120,20 q140,-50 160,0" additive="sum" fill="freeze" />
+                <animateMotion begin="5s" dur="5s" path="M10,80 q100,120 120,20 q140,-50 160,0" additive="sum" fill="freeze" />
+                <animateMotion begin="10s" dur="5s" path="M10,80 q100,120 120,20 q140,-50 160,0" additive="sum" fill="freeze" />
+            </text>
+       </svg>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 14</h3>
+        <svg style="background: pink;" width="820" height="800" font-family="microsoft yahei" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <text font-size="20" y="400" x="400">马
+                <animateTransform attributeName="transform" type="scale" from="1" to="3" dur="10s" repeatCount="indefinite" additive="sum"/>
+                <animateTransform attributeName="transform" type="rotate" from="0 30 20" to="160 30 20" dur="10s" fill="freeze" repeatCount="indefinite" additive="sum"/>
+            </text>
+        </svg>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 15</h3>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 16</h3>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 17</h3>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 18</h3>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 19</h3>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 20</h3>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 21</h3>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 22</h3>
+    </div>
+    <div class="flex f-d-c">
+        <h3>Demo 23</h3>
+    </div> -->
+    <canvas id="myCanvas"></canvas>
+    <script>
+        // Demo11
+        /* var animate = document.getElementById('demo11');
+        if (animate) {
+            console.log(animate);
+            document.getElementById("demo11Svg").onclick = function() {
+                console.log(animate);
+                animate.beginElement();
+            };
+        } */
+
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+
+        const radius = 150;
+        const cardCount = 5;
+        const angleDelta = (2 * Math.PI) / cardCount;
+
+        function drawCard(x, y, angle) {
+            const cardWidth = 60;
+            const cardHeight = 90;
+
+            // Draw card background
+            ctx.fillStyle = "white";
+            ctx.fillRect(x - cardWidth / 2, y - cardHeight / 2, cardWidth, cardHeight);
+
+            // Draw card border
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 2;
+            ctx.strokeRect(x - cardWidth / 2, y - cardHeight / 2, cardWidth, cardHeight);
+
+            // Draw card number
+            ctx.fillStyle = "black";
+            ctx.font = "bold 24px sans-serif";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText("A", x, y);
+        }
+
+        function drawCards() {
+            for (let i = 0; i < cardCount; i++) {
+                const angle = i * angleDelta;
+                const x = canvas.width / 2 + radius * Math.cos(angle);
+                const y = canvas.height / 2 + radius * Math.sin(angle);
+
+                drawCard(x, y, angle);
+            }
+        }
+
+        function clearCanvas() {
+            console.log(canvas.width, canvas.height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function draw() {
+            clearCanvas();
+
+            // Update angle
+            angle += 0.02;
+
+            // Draw cards
+            drawCards();
+
+            requestAnimationFrame(draw);
+        }
+
+        let angle = 0;
+        draw();
+
+    </script>
+</body>
+</html>
