@@ -21,7 +21,7 @@ fn main () {
     
 
     // 2、方法中使用泛型
-    // TODO: 在方法中使用泛型时，需要先定义泛型，注意：   impl<T> 这才是定义泛型， 而 Point<T> 整体是表示一个Struct；
+    // TODO: 在方法中使用泛型时，需要先声明泛型，注意：   impl<T> 是声明泛型，这样Rust才知道 Point<T> 中的 T 是一个泛型，而不是一个类型；
     /* struct Point<T> {
         x: T,
         y: T
